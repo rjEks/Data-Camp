@@ -1,0 +1,374 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "image/png": "iVBORw0KGgoAAAANSUhEUgAAAYUAAAEWCAYAAACJ0YulAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz\nAAALEgAACxIB0t1+/AAAGvRJREFUeJzt3Xm4JHV97/H3hxmIAUcWmXBZjKBBuMQo6ih4QSWRKG4B\nEy6RuAAumIgBjUbRGMWoUZ9riBgjERfADUXciMkVFSWIonFYZDWBMBCWAYYIAhpR4Js/6neK5njO\nTM/S3WfmvF/P08/pWrrqW9XV/Tn1q6VTVUiSBLDRpAuQJM0dhoIkqWcoSJJ6hoIkqWcoSJJ6hoIk\nqWcorEeSXJpkn0nXMZckOSnJ2yddx4ZkrqzTJP8/ySGTrmO+MRTmiCRXJ9l3Wr9Dk5wz1V1Vv1lV\nZ61iOjsmqSQLR1TqBiOdI5NckuQnSa5L8tkkv7UOpn1Wkpeuizrnq6p6RlWdPOk65htDQatlAwub\n44CjgCOBrYBHAF8EnjXJoqRJMhTWI4N7E0mekGRpktuT3JTk2Dba2e3vbUnuTPLEJBsleVOSa5Lc\nnORjSTYfmO6L2rD/SvKX0+ZzTJLTknwiye3AoW3e5ya5LcnyJO9PssnA9CrJK5JckeSOJG9L8vAk\n32n1njo1fpItk3w5yYokt7bnO6xkHTwmyfltup8BHjBt+LOTXNhq+06SR80ynZ2BI4CDq+obVXVX\nVf20qj5ZVe9q42ze1tWKtn7elGSjNuzQJOckeU+re1mSZ7Rh7wCeBLy/vQfvb/2PS3JtWwfnJXnS\nQD2/muTkNq3Lk7wuyXUDw7dL8rlWy7IkRw4MO6bt4XyirZeLkzwiyRva+31tkqeNep0OsYyrVWcG\n9raSLEjyN0luacv/ygzsEbf1c3qSHyW5MsnLBqYz22dFM6kqH3PgAVwN7Dut36HAOTONA5wLvLA9\nfyCwZ3u+I1DAwoHXvRi4EnhYG/fzwMfbsN2AO4G9gU2A9wC/GJjPMa37ALp/In4VeBywJ7Cwze9y\n4FUD8yvgS8CDgN8E7gLObPPfHLgMOKSN+2DgD4BNgUXAZ4EvzrKONgGuAV4NbAwc2Gp7exv+GOBm\nYA9gAXBIW2e/MsO0/hi4ZhXvycfacixqy/nvwEsG3ptfAC9r8/oT4AYgbfhZwEunTe8FbXkXAq8B\nbgQe0Ia9C/gXYEtgB+Ai4Lo2bCPgPODNbR08DLgKePrAe/Qz4Olt2h8DlgF/0dbTy4Blo16nQyzj\natU5uA7b+3VZWzdbAl9nYDun+2foA3SBtjuwAvidlX1WfMyy3U+6AB/tjeg+aHcCtw08fsrsoXA2\n8FZg62nT2ZFfDoUzgVcMdO/SPvgL2xfNKQPDNgV+zv1D4exV1P4q4AsD3QXsNdB9HvD6ge6/Ad47\ny7R2B26dZdiTGfjibf2+M/AFdjzwtmmv+TfgKTNM6y+A765kmRa09bDbQL+XA2e154cCV05bbwX8\nr9bdf6GtZB63Ao9uz/sv+db9Uu4LhT2A/5z22jcAJw68R18bGPacti0taN2LWm1bjHKdDrGMq1Un\n9w+FbwAvH3jtvm3chcBDgHuARQPD3wmctLLPio+ZHzYfzS0HVNUWUw/gFSsZ9yV0beA/TPL9JM9e\nybjb0f03OOUaug/TNm3YtVMDquqnwH9Ne/21gx1tl//LSW5sTUp/DWw97TU3DTz/7xm6H9imtWmS\nD7bmmdvpPsBbJFkwy3JcX+2TPrAsUx4KvKY1c9yW5Da6L4ztZpjWfwHbztB/ytZ0/71OX2/bD3Tf\nOPWkrTemlmsmSV7bmoZ+3GrbnPvW2/3eh2nPHwpsN2253kj3/k2Zvn5vqap7Brpnq21drtNVLePa\n1jnb+tkO+FFV3TFtGabeq9X5rMx7hsJ6qqquqKqDgV8D3g2clmQzuv+epruB7sM95deBu+k+oMvp\ndsmBrm2bbvf/frOb1n088ENg56p6EN0XVNZwUV5Dt+eyR5vWk6dKmWHc5cD2SQaH/frA82uBdwwG\na1VtWlWnzDCtM4EdkiyZpa5b6Pampq+361e9SMC0ddba1l8HHARs2UL/x9y3nPd7H+i+eAeXa9m0\n5VpUVc8cspaVWWfrdIhlXNs6Z1s/NwBbJVk0bRmuh5V+VjQDQ2E9leQFSRZX1b10TU0A99K1pd5L\n1+485RTg1Ul2SvJAuv/sP1NVdwOnAc9J8n/SHfw9hlV/iBcBtwN3JtmVrj19TS2i+w/xtiRbAW9Z\nybjn0oXZkUk2TvL7wBMGhn8I+OMke6SzWZJnTfuyALovCro26FOS7JNkkyQPSPK8JEe3/15PBd6R\nZFGShwJ/BnxiyOW6ifu/B4ta7SuAhUneTHfMZcqpwBvSHXjfHnjlwLB/Be5I8vp0B6QXJHlkkscP\nWcvKrLN1OsQyro1TgaOSbJ9kC+D1UwOq6lq6Jq93tvfwUXR7B5+AlX5WNANDYf21H3BpkjvpTq18\nXlX9d2vGeAfw7ba7vyfwUeDjdE0zy+gO9v0pQFVd2p5/mu6/sTvpDizetZJ5vxb4I+AOui+Nz6zF\ncryX7uD1LcB3ga/MNmJV/Rz4fbr2/B8Bf0h30Hxq+FK6g5Xvp2vLvrKNO5sj27h/T/dl8R/Ac4F/\nbMP/FPgJXXv/OcCn6NblMI4DDkx3NtH7gDPasv07XdPGz7h/E8hfAdfRvT9fpwvru9py3QM8m+54\nyzK6dfVhuqaZtbKO1+mqlnFtfAj4Kt0B+AuAf6YLoKmmp4PpjqfdAHwBeEtVfb0Nm/Gzso7q2uBM\nnSkhAdD2JG6jaxpaNul65qskf0L35fWUSdcyF6U7/fcfquqhqxxZq8U9BZHkOe2A72Z0p6ReTHem\nk8YkybZJ9kp3TckudMdavjDpuuaK1mz2zCQLW/PaW3D9jMTIQiHJQ5J8M8ll6e7Zc1Trf0yS69Nd\nDHNhknVxsExrZ3+63e4bgJ3p/kN1F3K8NgE+SNck9w266yM+MNGK5pbQnVZ6K13z0eV0p1NrHRtZ\n81GSbYFtq+r8dlDqPLoLoA4C7qyq94xkxpKkNTay+9hU1XK6A5dU1R1JLuf+53hLkuaYsRxoTrIj\n3Zkvj6Q7re9QulMalwKvqapbZ3jN4cDhAJttttnjdt1115HXKUkbkvPOO++Wqlq8Oq8ZeSi0s1n+\nhe4CmM8n2YbulLoC3kbXxPTilU1jyZIltXTp0pHWKUkbmiTnVdVsF2jOaKRnHyXZGPgc8Mmq+jxA\nVd1UVfe0C0k+xP0vlJEkTdAozz4K8BHg8qo6dqD/4P1mngtcMqoaJEmrZ5Q/mLIX8ELg4iQXtn5v\nBA5Osjtd89HVdHeelCTNAaM8++gcZr6Hzj+Pap6SpLXjFc2SpJ6hIEnqGQqSpJ6hIEnqGQqSpJ6h\nIEnqGQqSpJ6hIEnqGQqSpJ6hIEnqGQqSpJ6hIEnqGQqSpJ6hIEnqGQqSpJ6hIEnqGQqSpJ6hIEnq\nGQqSpJ6hIEnqGQqSpJ6hIEnqGQqSpJ6hIEnqGQqSpJ6hIEnqGQqSpJ6hIEnqGQqSpJ6hIEnqGQqS\npJ6hIEnqGQqSpJ6hIEnqGQqSpN7IQiHJQ5J8M8llSS5NclTrv1WSryW5ov3dclQ1SJJWzyj3FO4G\nXlNVuwF7Akck2Q04GjizqnYGzmzdkqQ5YGShUFXLq+r89vwO4HJge2B/4OQ22snAAaOqQZK0esZy\nTCHJjsBjgO8B21TV8jboRmCbWV5zeJKlSZauWLFiHGVK0rw38lBI8kDgc8Crqur2wWFVVUDN9Lqq\nOqGqllTVksWLF4+6TEkSIw6FJBvTBcInq+rzrfdNSbZtw7cFbh5lDZKk4Y3y7KMAHwEur6pjBwad\nDhzSnh8CfGlUNUiSVs/CEU57L+CFwMVJLmz93gi8Czg1yUuAa4CDRliDJGk1jCwUquocILMMfuqo\n5itJWnNe0SxJ6hkKkqSeoSBJ6hkKkqSeoSBJ6hkKkqSeoSBJ6hkKkqSeoSBJ6hkKkqSeoSBJ6hkK\nkqSeoSBJ6hkKkqSeoSBJ6hkKkqSeoSBJ6hkKkqSeoSBJ6hkKkqSeoSBJ6hkKkqSeoSBJ6hkKkqSe\noSBJ6hkKkqSeoSBJ6hkKkqTeKkMhyVFJHpTOR5Kcn+Rp4yhOkjRew+wpvLiqbgeeBiwGDgPeNdKq\nJEkTMUwopP19JnBiVf1goJ8kaQMyTCicl+SrdKFwRpJFwL2jLUuSNAkLhxjnJcDuwFVV9dMkD6Zr\nQpIkbWBWGQpVdW+SZcAjkjxgDDVJkiZkmLOPXgqcDZwBvLX9PWaI1300yc1JLhnod0yS65Nc2B7P\nXPPSJUnr2jDHFI4CHg9cU1W/DTwGWDHE604C9puh/99W1e7t8c9DVypJGrlhQuFnVfUzgCS/UlU/\nBHZZ1Yuq6mzgR2tZnyRpjIYJheuSbAF8Efhaki8BN6zFPF+Z5KLWvLTlbCMlOTzJ0iRLV6wYZsdE\nkrS2UlXDj5w8Bdgc+EpV/XyI8XcEvlxVj2zd2wC3AAW8Ddi2ql68quksWbKkli5dOnSdkiRIcl5V\nLVmd1wxzSipJHg08qXV+a5hAmElV3TQwzQ8BX16T6UiSRmOoex8BnwR+rT0+keRP12RmSbYd6Hwu\ncMls40qSxm/Yi9f2qKqfACR5N3Au8Hcre1GSU4B9gK2TXAe8Bdgnye50zUdXAy9f48olSevcMKEQ\n4J6B7nsY4t5HVXXwDL0/MmRdkqQJGCYUTgS+l+QLdGGwP365S9IGaZjbXByb5Cxg79brsKq6YKRV\nSZImYpWhkOThwKVVdX6SfYAnJVlWVbeNvDpJ0lgNc/Ha54B7kvwG8GFgJ+BTI61KkjQRw4TCvVV1\nN/D7wHFV9Wpg21W8RpK0HhomFH6R5GDgRdx3sdnGoytJkjQpw4TCYcATgXdU1bIkOwEfH21ZkqRJ\nGObso8uAIwHaDewWVdW7R12YJGn8hrnNxVlJHpRkK+AHwIlJjh19aZKkcRum+Wjzqrqd7kDziVX1\nOGDf0ZYlSZqEYUJhYbuR3UF4V1NJ2qANEwp/Rfe7zP9RVd9P8jDgitGWJUmahGEONH8W+OxA91XA\nH4yyKEnSZAxzoPkRSc5McknrflSSN42+NEnSuA3TfPQh4A3ALwCq6iLgeaMsSpI0GcOEwqZV9a/T\n+t09imIkSZM1TCjc0u6UWgBJDgSWj7QqSdJEDPMjO0cAJwC7JrkeWAY8f6RVSZImYpizj64C9k2y\nGbBRVd0x+rIkSZMwzNlHD07yPuBbwFlJjkvy4NGXJkkat2GOKXwaWEF3bcKB7flnRlmUJGkyhjmm\nsFVVvW2g++1JDhhVQZKkyRlmT+GbSZ6XZKP2OAj4p1EXJkkav2FC4eV0v8l8V3t8GvizJHckuX2U\nxUmSxmuYs48WjaMQSdLkDbOnIEmaJwwFSVLPUJAk9YYKhSR7JzmsPV+cZKfRliVJmoRhrmh+C/B6\nuttnA2wMfGKURUmSJmOYPYXnAr8H/ASgqm4APCNJkjZAw4TCz6uquO/W2ZuNtiRJ0qQMEwqnJvkg\nsEWSlwFfp/s1NknSBmaYi9fek+R3gduBXYA3V9XXRl6ZJGnshrkhHi0EDAJJ2sDN2nw0dW+j2R6r\nmnCSjya5OcklA/22SvK1JFe0v1uuqwWRJK29WUOhqhZV1YOA9wJHA9sDO9Cdnvr2IaZ9ErDftH5H\nA2dW1c7Ama1bkjRHDHOg+elV9YGquqOqbq+q4+l+cGelqups4EfTeu8PnNyenwz4uwySNIcMEwr3\nJHl+kgXt9xSeD9yzhvPbpqqWt+c3AtvMNmKSw5MsTbJ0xYoVazg7SdLqGCYU/gg4CLipPf5v67dW\nBq99mGX4CVW1pKqWLF68eG1nJ0kawjCnpF5N1+yzLtyUZNuqWp5kW+DmdTRdSdI6MO67pJ4OHNKe\nHwJ8aczzlyStxMhCIckpwLnALkmuS/IS4F3A7ya5Ati3dUuS5oihLl5bE1V18CyDnjqqeUqS1s4w\nt85+08DzXxltOZKkSVrZFc2vT/JE4MCB3ueOviRJ0qSsrPnoh3Snnz4sybda94OT7FJV/zaW6iRJ\nY7Wy5qPbgDcCVwL7AMe1/kcn+c6I65IkTcDK9hSeDrwZeDhwLHAR8JOqOmwchUmSxm9lN8R7Y1U9\nFbga+DiwAFic5Jwk/zim+iRJYzTMKalnVNVSYGmSP6mqvZNsPerCJEnjt8pTUqvqdQOdh7Z+t4yq\nIEnS5KzWFc1V9YNRFSJJmrxx3/tIkjSHGQqSpJ6hIEnqGQqSpJ6hIEnqGQqSpJ6hIEnqGQqSpJ6h\nIEnqGQqSpJ6hIEnqGQqSpJ6hIEnqGQqSpJ6hIEnqGQqSpJ6hIEnqGQqSpJ6hIEnqGQqSpJ6hIEnq\nGQqSpJ6hIEnqGQqSpJ6hIEnqLZzETJNcDdwB3APcXVVLJlGHJOn+JhIKzW9X1S0TnL8kaRqbjyRJ\nvUmFQgFfTXJeksNnGiHJ4UmWJlm6YsWKMZcnSfPTpEJh76p6LPAM4IgkT54+QlWdUFVLqmrJ4sWL\nx1+hJM1DEwmFqrq+/b0Z+ALwhEnUIUm6v7GHQpLNkiyaeg48Dbhk3HVIkn7ZJM4+2gb4QpKp+X+q\nqr4ygTokSdOMPRSq6irg0eOeryRp1TwlVZLUMxQkST1DQZLUMxQkST1DQZLUMxQkST1DQZLUMxQk\nST1DQZLUMxQkST1DQZLUMxQkST1DQZLUMxQkST1DQZLUMxQkST1DQZLUMxQkST1DQZLUMxQkST1D\nQZLUMxQkST1DQZLUMxQkST1DQZLUMxQkST1DQZLUMxQkST1DQZLUWzjpAtZnOx79T/3zq9/1rAlW\nsmqTqnVdz3f69Ka6R71M69N7vS6Ma72uT9Z0G1jftlH3FCRJPUNBktQzFCRJPUNBktQzFCRJvYmE\nQpL9kvxbkiuTHD2JGiRJv2zsoZBkAfD3wDOA3YCDk+w27jokSb9sEnsKTwCurKqrqurnwKeB/SdQ\nhyRpmlTVeGeYHAjsV1Uvbd0vBPaoqldOG+9w4PDW+UjgkrEWOjdtDdwy6SLmCNdFx/XQcT10pq+H\nh1bV4tWZwJy9ormqTgBOAEiytKqWTLikiXM93Md10XE9dFwPnXWxHibRfHQ98JCB7h1aP0nShE0i\nFL4P7JxkpySbAM8DTp9AHZKkacbefFRVdyd5JXAGsAD4aFVduoqXnTD6ytYLrof7uC46roeO66Gz\n1uth7AeaJUlzl1c0S5J6hoIkqTenQ2E+3w4jyUOSfDPJZUkuTXJU679Vkq8luaL93XLStY5DkgVJ\nLkjy5da9U5LvtW3jM+2khQ1aki2SnJbkh0kuT/LEebw9vLp9Li5JckqSB8yHbSLJR5PcnOSSgX4z\nbgPpvK+tj4uSPHaYeczZUPB2GNwNvKaqdgP2BI5oy380cGZV7Qyc2brng6OAywe63w38bVX9BnAr\n8JKJVDVexwFfqapdgUfTrY95tz0k2R44ElhSVY+kO2HlecyPbeIkYL9p/WbbBp4B7NwehwPHDzOD\nORsKzPPbYVTV8qo6vz2/g+4LYHu6dXByG+1k4IDJVDg+SXYAngV8uHUH+B3gtDbKBr8ekmwOPBn4\nCEBV/byqbmMebg/NQuBXkywENgWWMw+2iao6G/jRtN6zbQP7Ax+rzneBLZJsu6p5zOVQ2B64dqD7\nutZv3kmyI/AY4HvANlW1vA26EdhmQmWN03uB1wH3tu4HA7dV1d2tez5sGzsBK4ATWzPah5Nsxjzc\nHqrqeuA9wH/ShcGPgfOYf9vElNm2gTX6Dp3LoSAgyQOBzwGvqqrbB4dVdz7xBn1OcZJnAzdX1XmT\nrmXCFgKPBY6vqscAP2FaU9F82B4AWpv5/nRBuR2wGb/cpDIvrYttYC6Hwry/HUaSjekC4ZNV9fnW\n+6apXcD29+ZJ1TcmewG/l+RquibE36FrW9+iNR3A/Ng2rgOuq6rvte7T6EJivm0PAPsCy6pqRVX9\nAvg83XYy37aJKbNtA2v0HTqXQ2Fe3w6jtZt/BLi8qo4dGHQ6cEh7fgjwpXHXNk5V9Yaq2qGqdqTb\nBr5RVc8Hvgkc2EabD+vhRuDaJLu0Xk8FLmOebQ/NfwJ7Jtm0fU6m1sW82iYGzLYNnA68qJ2FtCfw\n44FmplnN6SuakzyTrj156nYY75hwSWOTZG/gW8DF3NeW/ka64wqnAr8OXAMcVFXTDzxtkJLsA7y2\nqp6d5GF0ew5bARcAL6iquyZZ36gl2Z3uYPsmwFXAYXT/2M277SHJW4E/pDtL7wLgpXTt5Rv0NpHk\nFGAfultk3wS8BfgiM2wDLTDfT9e09lPgsKpausp5zOVQkCSN11xuPpIkjZmhIEnqGQqSpJ6hIEnq\nGQqSpJ6hoA1Kkncm+e0kByR5w5CvuXPUdQ3Ma7skp616TGkyDAVtaPYAvgs8BTh7wrX8kqq6oaoO\nXPWY0mQYCtogJPl/SS4CHg+cS3cx0/FJ3jzDuDslOTfJ95O8bdqwP2/9L2oXSM00r+OTLG3383/r\nQP+rk/x1m/bSJI9NckaS/0jyx22cHafuhd+uyD21zesz7bcAlrRhBye5uP1ewLtbvwVJTmr9Lk7y\n6nWz9qT7LFz1KNLcV1V/nuRU4EXAnwFnVdVes4x+HN2N5T6W5IipnkmeRnfv+ScAAU5P8uR2u+JB\nf9GuGF0AnJnkUVV1URt2bVU9Mcnf0t37fi/gAcAlwD9Mm84rgFur6lFJHglc2OrYju63AR5H97sA\nX01yAN0dL7dvvyFAki1WayVJQ3BPQRuSxwI/AHbl/j/IM91ewCnt+ccH+j+tPS4Azm/T2XmG1x+U\n5Pw23m/S/QjUlKn7c10MfK+q7qiqFcBdM3yJ7013Wwaq6hJgKlgeTxdqK9qtoD9J91sKVwEPS/J3\nSfYDbkdax9xT0Hqv3RPoJLq7QN5C96MrSXIh8MSq+u8ZXjbT/V0CvLOqPriSee0EvBZ4fFXdmuQk\nuj2BKVP32rl34PlU91p93tr8Hg08HTgCOAh48dpMU5rOPQWt96rqwqraHfh3uv/avwE8vap2nyUQ\nvk13x1WA5w/0PwN4cfsNC5Jsn+TXpr32QXS/ZfDjJNvQ/eThmvo23Rc77adWf6v1/1fgKUm2bk1U\nBwP/kmRrYKOq+hzwl3R7RtI65Z6CNghJFtO1z9+bZNequmwlox8FfCrJUXS/VwFAVX01yf8Gzu1u\nMMmdwAsY+I2CqvpBkguAS+mac769FmV/ADi5HSC/gK756MdVtTzJ0XS3gg7wT1X1pbaXcGKSqX/m\nhjrlVlod3iVVmpC2F7BxVf0sycOBrwO7tN8klybCPQVpcjYFvtl+YS/AKwwETZp7CpKkngeaJUk9\nQ0GS1DMUJEk9Q0GS1DMUJEm9/wH+UxIOd4/VeAAAAABJRU5ErkJggg==\n",
+      "text/plain": [
+       "<matplotlib.figure.Figure at 0x60851d0>"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    }
+   ],
+   "source": [
+    "#Notebook para conceitos estatisticos em Python\n",
+    "\n",
+    "import matplotlib.pyplot as plt\n",
+    "%matplotlib inline \n",
+    "import collections as clt\n",
+    "\n",
+    "num_friends = [100,49,41,40,25,34,67,88,92,12]\n",
+    "\n",
+    "contagem_amigos = clt.Counter(num_friends)\n",
+    "\n",
+    "xs = range(101) # Numero maior 100\n",
+    "ys = [contagem_amigos[x] for x in xs] # Altura é o numero de amigos\n",
+    "\n",
+    "#Plotando grafico\n",
+    "plt.bar(xs,ys)\n",
+    "plt.axis ([0,101,0,25])\n",
+    "plt.title(\"Histograma de Contagem de amigos\")\n",
+    "plt.xlabel(\"# de amigos\")\n",
+    "plt.ylabel(\"# de pessoas\")\n",
+    "plt.show()\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "100\n",
+      "12\n"
+     ]
+    }
+   ],
+   "source": [
+    "num_points = len(num_friends) # Numero de pontos\n",
+    "\n",
+    "#Maior Valor\n",
+    "largest_value = max(num_friends)\n",
+    "print(largest_value)\n",
+    "\n",
+    "#Menor Valor\n",
+    "smallest_value = min(num_friends)\n",
+    "print(smallest_value)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "54.8"
+      ]
+     },
+     "execution_count": 3,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "#Função de Media\n",
+    "def mean(x):\n",
+    "    return sum(x)/len(x)\n",
+    "\n",
+    "mean(num_friends)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "45.0"
+      ]
+     },
+     "execution_count": 4,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "#Função Mediana\n",
+    "def median(v):\n",
+    "    #Encontrando valores do meio de V\n",
+    "    n = len(v)\n",
+    "    sorted_v = sorted(v)\n",
+    "    midpoint = n//2\n",
+    "    \n",
+    "    if n % 2 == 1:\n",
+    "        #impar retorna o valor do meio\n",
+    "        return sorted_v[midpoint]\n",
+    "    \n",
+    "    else:\n",
+    "        #par retorna a media dos valores\n",
+    "        lo = midpoint -1\n",
+    "        hi = midpoint\n",
+    "        return (sorted_v[lo] + sorted_v[hi]) /2 \n",
+    "    \n",
+    "    \n",
+    "    \n",
+    "median(num_friends) # retornando mediana\n",
+    "    \n",
+    "    "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "25\n",
+      "34\n",
+      "88\n",
+      "100\n"
+     ]
+    }
+   ],
+   "source": [
+    "#Realizando generalização da media para quantil\n",
+    "\n",
+    "def quantile(x,p):\n",
+    "    p_index = int(p*len(x))\n",
+    "    return sorted(x)[p_index]\n",
+    "\n",
+    "print(quantile(num_friends, 0.10))\n",
+    "print(quantile(num_friends, 0.25))\n",
+    "print(quantile(num_friends, 0.75))\n",
+    "print(quantile(num_friends, 0.90))\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "metadata": {
+    "collapsed": true
+   },
+   "outputs": [],
+   "source": [
+    "#Moda\n",
+    "def mode(x):\n",
+    "    #valores de moda no dataset\n",
+    "    counts = Counter(x)\n",
+    "    max_count = max(counts.value())\n",
+    "    return [x_i for x_i, count in counts.iteritems()\n",
+    "           if count==max_count]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "88"
+      ]
+     },
+     "execution_count": 7,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "#Definindo Apmplitude dos dados\n",
+    "\n",
+    "def data_range(x):\n",
+    "    return max(x) - min(x)\n",
+    "\n",
+    "data_range(num_friends)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "30.319777190620794"
+      ]
+     },
+     "execution_count": 8,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "# Obtendo Variancia e DesvioPadrao\n",
+    "\n",
+    "import math\n",
+    "\n",
+    "def sum_of_squares(n):\n",
+    "    return sum(i**2 for i in n)\n",
+    "\n",
+    "def de_mean(x):\n",
+    "    x_bar = mean(x)\n",
+    "    return[x_i-x_bar for x_i in x]\n",
+    "\n",
+    "def variance(x):\n",
+    "    n = len(x)\n",
+    "    deviations = de_mean(x)\n",
+    "    return sum_of_squares(deviations)/(n-1)\n",
+    "\n",
+    "#Print obtendo Variancia\n",
+    "variance(num_friends)\n",
+    "\n",
+    "#Obtendo Desvio Padrao\n",
+    "def standard_deviation(x):\n",
+    "    return math.sqrt(variance(x))\n",
+    "\n",
+    "standard_deviation(num_friends)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 11,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "-333.22222222222223"
+      ]
+     },
+     "execution_count": 11,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "import numpy as np\n",
+    "\n",
+    "dayli_minutes =  [10,19,71,23,55,63,86,40,37,66]\n",
+    "\n",
+    "def covariance(x,y):\n",
+    "    n = len(x)\n",
+    "    return np.dot(de_mean(x),de_mean(y)) / (n-1)\n",
+    "\n",
+    "covariance(num_friends,dayli_minutes)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 12,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "-0.43840399712503003"
+      ]
+     },
+     "execution_count": 12,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "#obtendo correlação\n",
+    "def correlation(x,y):\n",
+    "    stdev_x = standard_deviation(x)\n",
+    "    stdev_y = standard_deviation(y)\n",
+    "    if stdev_x > 0 and stdev_y >0:\n",
+    "        return covariance(x,y)/stdev_x/stdev_y\n",
+    "    else:\n",
+    "        return 0 # se nao houver amplitude , correlação = 0 \n",
+    "    \n",
+    "correlation(num_friends,dayli_minutes)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 16,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "-0.2289627663999238"
+      ]
+     },
+     "execution_count": 16,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "#removendo outlier\n",
+    "\n",
+    "outlier = num_friends.index(100)\n",
+    "\n",
+    "num_friends_good =[x for i, x in enumerate(num_friends) if i != outlier]\n",
+    "\n",
+    "dayli_friends_good =[x for i, x in enumerate(dayli_minutes) if i != outlier]\n",
+    "\n",
+    "correlation(num_friends_good, dayli_friends_good)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": true
+   },
+   "outputs": [],
+   "source": [
+    "A covariância entre duas variáveis pode ser obtida de dados de variância[1]. Para variáveis aleatórias X e Y, sejam:\n",
+    "\n",
+    "{\\displaystyle \\operatorname {var} (X)\\,} {\\displaystyle \\operatorname {var} (X)\\,} é a variância populacional de X\n",
+    "{\\displaystyle \\operatorname {var} (Y)\\,} {\\displaystyle \\operatorname {var} (Y)\\,} é a variância populacional de Y\n",
+    "{\\displaystyle \\operatorname {var} (X+Y)\\,} {\\displaystyle \\operatorname {var} (X+Y)\\,} é a variância populacional de uma variável obtida a partir da soma simples das variáveis X e Y.\n",
+    "\"a\" e \"b\" são constantes\n",
+    "Então, teremos:\n",
+    "\n",
+    "{\\displaystyle \\operatorname {cov} (X,Y)={\\frac {\\operatorname {var} (aX+bY)-a^{2}\\operatorname {var} (X)\\,-b^{2}\\operatorname {var} (Y)\\,}{2ab}}} {\\displaystyle \\operatorname {cov} (X,Y)={\\frac {\\operatorname {var} (aX+bY)-a^{2}\\operatorname {var} (X)\\,-b^{2}\\operatorname {var} (Y)\\,}{2ab}}}"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.6.2"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}
